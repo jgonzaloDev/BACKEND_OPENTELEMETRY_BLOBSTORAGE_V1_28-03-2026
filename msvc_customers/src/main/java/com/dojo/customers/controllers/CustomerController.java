@@ -53,7 +53,7 @@ public class CustomerController {
 	public ResponseEntity<?> findById(@PathVariable Long id) {
 		Optional<Customer> optionalCustomer =service.findById(id);
 		if(optionalCustomer.isPresent()) {
-			logger.info("Cliente : "+optionalCustomer.get());
+			logger.info("Cliente : "+optionalCustomer.get().toString());
 			return ResponseEntity.ok(optionalCustomer.get());
 		}
 			logger.warn("Cliente con id: "+id+" no encontrado!");
@@ -74,7 +74,7 @@ public class CustomerController {
 	//v1
 	@PostMapping
 	public ResponseEntity<Customer> save(@RequestBody Customer customer) {
-		logger.info("Nuevo Cliente : "+ customer);
+		logger.info("Nuevo Cliente : "+ customer.toString());
 		return ResponseEntity.ok(service.save(customer));
 	}
 
@@ -86,12 +86,11 @@ public class CustomerController {
 //		}
 //		return ResponseEntity.ok(customer);
 //	}
-/* 
-	@PostMapping("/upload")
-	public ResponseEntity<String> upload(@RequestParam("file") MultipartFile file) throws IOException {
-		String url = blobStorageService.uploadFile(file);
-		return ResponseEntity.ok(url);
-	}
+
+//	@PostMapping("/upload")
+//	public ResponseEntity<String> upload(@RequestParam("file") MultipartFile file) throws IOException {
+//		String url = blobStorageService.uploadFile(file);
+//		return ResponseEntity.ok(url);
+//	}
 
 }
-	*/

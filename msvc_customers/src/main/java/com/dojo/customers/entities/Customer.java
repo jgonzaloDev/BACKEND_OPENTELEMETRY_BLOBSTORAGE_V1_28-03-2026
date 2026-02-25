@@ -1,11 +1,7 @@
 package com.dojo.customers.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -22,5 +18,21 @@ public class Customer {
 	private String username;
 	@Column(name="cellphone")
 	private String cellPhone;
+//	@Lob
+//	@JsonIgnore
+//	private byte[] photo;
+//
+//	public Integer getPhotoHashCode(){
+//		return (this.photo!=null) ? this.photo.hashCode():null;
+//	}
 
+	@Override
+	public String toString() {
+		return "Customer{" +
+				"name='" + name + '\'' +
+				", lastName='" + lastName + '\'' +
+				", username='" + username + '\'' +
+				", cellPhone='" + cellPhone + '\'' +
+				'}';
+	}
 }
