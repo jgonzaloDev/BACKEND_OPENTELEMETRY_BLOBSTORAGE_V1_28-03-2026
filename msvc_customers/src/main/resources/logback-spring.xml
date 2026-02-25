@@ -1,31 +1,39 @@
-<configuration>
-<!--    <appender name="ELASTIC" class="com.internetitem.logback.elasticsearch.ElasticsearchAppender">-->
-<!--        <url>http://elasticsearch:9200/app-logs/_doc</url>-->
-<!--        <user>elastic</user>-->
-<!--        <password>${ELASTIC_PASSWORD}</password>-->
-<!--        <index>app-logs</index>-->
+<!--<configuration>-->
 
-<!--        <layout class="ch.qos.logback.classic.PatternLayout">-->
-<!--            <pattern>%date %-5level [%thread] %logger{36} - %msg%n</pattern>-->
-<!--        </layout>-->
+<!--    &lt;!&ndash; Appender clásico de consola &ndash;&gt;-->
+<!--    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">-->
+<!--        <encoder>-->
+<!--            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level [%thread] %logger{36} - %msg%n</pattern>-->
+<!--        </encoder>-->
 <!--    </appender>-->
 
-<!--    <root level="INFO">-->
-<!--        <appender-ref ref="ELASTIC" />-->
-<!--    </root>-->
+<!--    &lt;!&ndash; Appender OpenTelemetry &ndash;&gt;-->
+<!--    <appender name="OTEL" class="io.opentelemetry.instrumentation.logback.appender.v1_0.OpenTelemetryAppender" />-->
 
-    <!-- Appender clásico de consola -->
-    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level [%thread] %logger{36} - %msg%n</pattern>
-        </encoder>
+<!--    <logger name="org.springframework" level="WARN"/>-->
+<!--    <logger name="org.hibernate" level="WARN"/>-->
+<!--    <logger name="io.opentelemetry" level="WARN"/>-->
+
+<!--    <root level="INFO">-->
+<!--        <appender-ref ref="CONSOLE"/>-->
+<!--        <appender-ref ref="OTEL"/>-->
+<!--    </root>-->
+<!--</configuration>-->
+
+
+<configuration>
+
+    <appender name="JSON_CONSOLE"
+              class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
     </appender>
 
-    <!-- Appender OpenTelemetry -->
-    <appender name="OTEL" class="io.opentelemetry.instrumentation.logback.appender.v1_0.OpenTelemetryAppender" />
+    <appender name="OTEL"
+              class="io.opentelemetry.instrumentation.logback.appender.v1_0.OpenTelemetryAppender"/>
 
     <root level="INFO">
-        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="JSON_CONSOLE"/>
         <appender-ref ref="OTEL"/>
     </root>
+
 </configuration>
